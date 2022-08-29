@@ -1,25 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+
+// imported components
+import Header from './components/header/header';
+
+
+// styles
+import GlobalStyle from "./GlobalStyles";
+import Homepage from './components/homepage/homepage';
+import SchedulingMenu from './components/scheduling/scheduling-menu';
+import CreateNewSchedule from './components/scheduling/create-new-schedule';
+import SignInPage from './sign-in/sign-in';
+import { AuthContextProvider } from './context-providers/auth-context';
+import VolunteerDataBaseMenu from './components/volunteerDataBaseMenu/volunteerDataBaseMenu';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <AuthContextProvider>
+      <div className="App">
+      <Router>
+        <Header />
+        <Routes>
+        <Route index element={<SignInPage />}/>
+          <Route path='Homepage' element={<Homepage />}/>
+          <Route path='SchedulingMenu' element={<SchedulingMenu />}/>
+          <Route path='CreateNewSchedule' element={<CreateNewSchedule/>}/>
+          <Route path='/VolunteerDatabaseMenu' element={<VolunteerDataBaseMenu />}/>
+        </Routes>
+        <GlobalStyle />
+      </Router>
     </div>
+    </AuthContextProvider>
   );
 }
 
