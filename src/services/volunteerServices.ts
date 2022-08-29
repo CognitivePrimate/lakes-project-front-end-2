@@ -48,7 +48,6 @@ export function fetchVolunteers(): Promise<Volunteer[]> {
 }
 
 export async function fetchExistingVolunteerAndSetUser(token: string): Promise<any> {
-    console.log('fetchvolfunctest')
     const headers = {
         headers: {
             authorization: 'Bearer ' + token
@@ -58,8 +57,12 @@ export async function fetchExistingVolunteerAndSetUser(token: string): Promise<a
         return await axios.post(`${baseURL}/volunteerDB/tokenAuth`, token, headers ).then((res) => {
             console.log('FERes', res.data)
             return res.data
+            //TURN INTO IF ELSE STATEMENT. IF UID EXISTS, ELSE CREATE USER
         }).then(async (data) => {
-            return await axios.post(`${baseURL}/volunteerDB`, data)
+            console.log('data', data)
+            const res = await axios.post(`${baseURL}/volunteerDB`, data.user)
+            console.log('(res).data:', JSON.stringify((res).data))
+            return await (res).data
         })
     } catch (e: any){
         console.log('error', e, typeof(e))
