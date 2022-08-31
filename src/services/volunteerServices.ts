@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import Volunteer from '../model/volunteer';
 import {fire} from '../firebaseConfig'
 import volunteer from '../model/volunteer';
+import { setUserId } from 'firebase/analytics';
 
 
 //firebase APIs to database
@@ -53,20 +54,17 @@ export async function fetchExistingVolunteerAndSetUser(token: string): Promise<a
             authorization: 'Bearer ' + token
         } 
     }
-    try{
-        return await axios.post(`${baseURL}/volunteerDB/tokenAuth`, token, headers ).then((res) => {
-            console.log('FERes', res.data)
-            return res.data
-            //TURN INTO IF ELSE STATEMENT. IF UID EXISTS, ELSE CREATE USER
-        }).then(async (data) => {
-            console.log('data', data)
-            const res = await axios.post(`${baseURL}/volunteerDB`, data.user)
-            console.log('(res).data:', JSON.stringify((res).data))
-            return await (res).data
+        return await axios.post(`${baseURL}/volunteerDB/tokenAuth`, token, headers ).then(async (res: AxiosResponse<any, any>) => {
+            let responseObject = res.data
+            if (responseObject._id ){
+                console.log('FERes', responseObject)
+                return await responseObject
+            } else {
+                console.log('else', responseObject)
+                const res = axios.post(`${baseURL}/volunteerDB`, responseObject.user)
+                return (await (res)).data
+            }   
+
         })
-    } catch (e: any){
-        console.log('error', e, typeof(e))
-        return e
-    }
 }
 

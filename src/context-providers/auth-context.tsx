@@ -14,12 +14,13 @@ import { FirebaseError } from 'firebase/app';
 import { Navigate, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { fetchExistingVolunteerAndSetUser } from '../services/volunteerServices';
+import Volunteer from '../model/volunteer';
 
 // const baseURL = process.env.REACT_APP_BASE_URL
 
 export interface AuthContextModel {
     // user if not logged in be null FIX ANY TYPE HOLY SHIT
-    user: User | null;
+    user: Volunteer | null;
     signInWithGoogle: () => void;
     register: (registerEmail: string, registerPassword: string) => void;
     login: (loginEmail: string, loginPassword: string) => void;
@@ -56,10 +57,13 @@ export const AuthContextProvider = ({children}: {children: ReactNode}) => {
                 auth.currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
                     console.log('IdToken', idToken)
                     // Send token to your backend via HTTPS
-                    fetchExistingVolunteerAndSetUser(idToken)
-
+                    fetchExistingVolunteerAndSetUser(idToken).then((user: Volunteer) => {
+                        setUser(user)
+                        console.log('User Set:', user.firstName + user.lastName)
+                    } )
+                    
                 }).catch(function(error) {
-                    // Handle error
+                    console.log(error)
                 });
             }
             // END TEST

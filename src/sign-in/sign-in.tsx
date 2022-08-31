@@ -24,7 +24,6 @@ const SignInPage = () => {
                 <h3>Register User</h3>
                 <input placeholder='email' onChange={(e) => {setEmail(e.target.value)}}/>
                 <input placeholder='password' onChange={(e) => {setPassword(e.target.value)}}/>
-
                 <button onClick={() => register}>Create User</button>
             </div>
 
@@ -35,9 +34,6 @@ const SignInPage = () => {
 
                 <button onClick={() => login}>Login</button>
             </div>
-            <h4> User Logged In: {user.user?.displayName} </h4>
-
-            <button onClick={logout}>Sign Out</button>
         </div>
     )
 }

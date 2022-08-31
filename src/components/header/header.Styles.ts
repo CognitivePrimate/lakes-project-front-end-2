@@ -13,6 +13,14 @@ export const Wrapper = styled.div`
     box-shadow: var(--boxShadowPrimary);
     transition: var(--transitionPrimary);
 
+    #displayName{
+        size: 2rem;
+    }
+
+    h1 {
+        width: 30%;
+    }
+
     @media ${device.mobileL} {
 
     }
