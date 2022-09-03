@@ -14,6 +14,7 @@ import CreateNewSchedule from './components/scheduling/create-new-schedule';
 import SignInPage from './sign-in/sign-in';
 import { AuthContextProvider } from './context-providers/auth-context';
 import VolunteerDataBaseMenu from './components/volunteerDataBaseMenu/volunteerDataBaseMenu';
+import OrgCreateSelect from './components/organizations/OrgCreateSelect';
 
 
 function App() {
@@ -27,7 +28,8 @@ function App() {
           <Route path='Homepage' element={<Homepage />}/>
           <Route path='SchedulingMenu' element={<SchedulingMenu />}/>
           <Route path='CreateNewSchedule' element={<CreateNewSchedule/>}/>
-          <Route path='/VolunteerDatabaseMenu' element={<VolunteerDataBaseMenu />}/>
+          <Route path='VolunteerDatabaseMenu' element={<VolunteerDataBaseMenu />}/>
+          <Route path='orgCreateSelect' element={< OrgCreateSelect/>}/>
         </Routes>
         <GlobalStyle />
       </Router>
@@ -36,4 +38,4 @@ function App() {
   );
 }
 
-export default App;
+export default App

@@ -10,7 +10,7 @@ const GlobalStyle = createGlobalStyle`
         --boxShadowPrimaryHover: 3px 3px 4px 4px rgba(0, 0, 0, 0.3);
         --textPrimary: #ffffff;
         --transitionPrimary: .3s;
-        
+        --borderRadiusPrimary: .15rem;
     }
 
     @keyframes FadeIn {
@@ -31,6 +31,8 @@ const GlobalStyle = createGlobalStyle`
     body {
         margin: 0;
         padding: 0;
+        display: flex;
+        justify-content: center;
         background-color: rgb(240, 240, 240);
     }
 
@@ -40,14 +42,20 @@ const GlobalStyle = createGlobalStyle`
         color: var(--textPrimary);
     }
 
+    h2 {
+        font-size: 1.2rem;
+        font-weight: 500;
+        color: var(--textPrimary);
+    }
+
     h3 {
-        font-size: .9rem;
+        font-size: 1rem;
         font-weight: 500;
         color: var(--textPrimary);
     }
 
     p {
-        font-size: 1rem;
+        font-size: .8rem;
         color: var(--textPrimary);
     }
 

@@ -3,13 +3,14 @@ import Volunteer from '../model/volunteer';
 import {fire} from '../firebaseConfig'
 import volunteer from '../model/volunteer';
 import { setUserId } from 'firebase/analytics';
+import { useNavigate } from 'react-router-dom';
 
 
 //firebase APIs to database
-const baseURL = process.env.REACT_APP_BASE_URL
+// const baseURL = process.env.REACT_APP_BASE_URL
 
 //local baseURL when running backend fb emulators
-// const baseURL = process.env.REACT_APP_LOCAL_BASE_URL
+const baseURL = process.env.REACT_APP_LOCAL_BASE_URL
 //create user tokens for backend auth? i think
 const createToken = async () => {
     const user = fire.auth().currentUser;
@@ -67,4 +68,3 @@ export async function fetchExistingVolunteerAndSetUser(token: string): Promise<a
 
         })
 }
-

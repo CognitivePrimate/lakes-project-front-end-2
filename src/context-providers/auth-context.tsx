@@ -46,13 +46,7 @@ export const AuthContextProvider = ({children}: {children: ReactNode}) => {
     // USEEFFECT HERE?! THEN REDIRECT?
     useEffect(() => {
         onAuthStateChanged(auth, (currentUser) => {
-            // TODO
-            // get authIdToken from Firebase
-            // send authIdToken to backend
-            // fetch volunteer data
-            // set user with v data from backend
-            // OR JUST USE MONGODB OBJECTID??
-            // TEST -- retrieve token from Firebase
+            //retrieve token from firebase
             if (auth.currentUser != null) {
                 auth.currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
                     console.log('IdToken', idToken)
@@ -66,8 +60,6 @@ export const AuthContextProvider = ({children}: {children: ReactNode}) => {
                     console.log(error)
                 });
             }
-            // END TEST
-            //THIS SHOULD ONLY 
             setUser(currentUser);
             console.log('currentUser', currentUser, typeof(currentUser));
         })
