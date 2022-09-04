@@ -68,3 +68,10 @@ export async function fetchExistingVolunteerAndSetUser(token: string): Promise<a
 
         })
 }
+
+export const updateVolunteer = async(volunteer: Volunteer): Promise<Volunteer> => {
+    return await axios.put(`${baseURL}/volunteerDB/${volunteer._id}`, volunteer).then((res) => {
+        console.log('putresponse', res.data)
+        return res.data
+    })
+}

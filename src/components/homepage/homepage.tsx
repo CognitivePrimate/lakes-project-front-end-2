@@ -21,8 +21,8 @@ const Homepage = () => {
     useEffect(() => {
         if(userObject !== null  && userObject !== undefined) {
             const user: Volunteer | null = userObject.user
-            let orgs: Organization[] | undefined = user?.organizations
-            let activeOrg: Organization | undefined = user?.activeOrganization
+            let orgs: object[] | undefined = user?.organizations
+            let activeOrg: object | undefined = user?.activeOrganization
     
             
              /**

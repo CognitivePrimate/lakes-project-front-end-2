@@ -31,5 +31,6 @@ export const Container = styled.div`
   h2, h3 {
     margin: .25rem;
     padding: .25rem;
+    color: black;
   }
 `

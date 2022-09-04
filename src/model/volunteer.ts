@@ -3,8 +3,9 @@ import Organization from "./organization";
 
 export default interface Volunteer {
     _id?: ObjectId;
-    organizations: Organization[];
-    activeOrganization: Organization | undefined;
+    uid: string;
+    organizations: object[];
+    activeOrganization: object | undefined;
     firstName: string;
     lastName:  string;
     preferredName?: string;

@@ -76,6 +76,16 @@ const GlobalStyle = createGlobalStyle`
         outline: none;
     }
 
+    select {
+        height: 1.5rem;
+        border-radius: var(--borderRadiusPrimary);
+        box-shadow: var(--boxShadowPrimary);
+    }
+
+    select:focus {
+        background: #FEF2EC;
+    }
+
     textarea {
         border: hidden;
         border-left: groove #ffffff;

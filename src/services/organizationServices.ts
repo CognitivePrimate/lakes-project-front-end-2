@@ -21,9 +21,9 @@ export const createNewOrganization = async(organization: Organization): Promise<
   console.log('increateorgfunc', organization)
   try{
       const res = axios.post(`${baseURL}/organizationDB`, organization)
-      console.log('orgfunc:', organization)
+      console.log('New Organization Created:', (await res).data.name)
       return (await res).data
   } catch(e) {
-      console.error(e)
+      console.error('There was an error creating your organization', e)
   }
 }
