@@ -1,10 +1,10 @@
 import { useContext, useEffect } from "react";
 import { Route, Router, Routes, useNavigate, useRoutes } from "react-router-dom";
-import { AuthContext, AuthContextModel } from "../../context-providers/auth-context";
+import { AuthContext, AuthContextModel, useAuthUser } from "../../context-providers/auth-context";
 import MenuButton from "../buttons/menuButton";
 import { Wrapper } from "./homepage.Styles"
-import Volunteer from "../../model/volunteer";
-import Organization from "../../model/organization";
+import {Volunteer} from "../../model/volunteer";
+import {Organization} from "../../model/organization";
 
 
 const Homepage = () => {
@@ -16,11 +16,14 @@ const Homepage = () => {
         // console.log('user', user)
       
     }
-    const userObject: AuthContextModel = useContext(AuthContext)
+    // const userObject: AuthContextModel = useContext(AuthContext)
+    const user = useAuthUser()
 
-    useEffect(() => {
-        if(userObject !== null  && userObject !== undefined) {
-            const user: Volunteer | null = userObject.user
+    useEffect( () => {
+       const volunteerStatusCheck = async () => {
+        if(user !== null  && user !== undefined) {
+            console.log('useeffect', user)
+            // const user: Volunteer | null =  userObject.user
             let orgs: object[] | undefined = user?.organizations
             let activeOrg: object | undefined = user?.activeOrganization
     
@@ -31,28 +34,27 @@ const Homepage = () => {
              * if 1, user.activeorganization = orgz[0]
              * if > 1 need to redirect
              */
+            //if volunteer belongs to more than one org redirect to select org to use
+            console.log('orgs.length', orgs?.length)
             if (orgs?.length !== undefined && orgs?.length > 1) {
+                console.log("first")
                 navigate('/orgCreateSelect', {replace: true})
+            //if vol belongs to only one org, set that org as active and navigate home
             } else if (orgs?.length !== undefined && orgs?.length === 1){
                 activeOrg = orgs[0]
-                console.log('activeOrg', user?.activeOrganization)
+                console.log('activeOrg', activeOrg)
+                navigate('/Homepage', {replace: true})
+            //if volunteer has no orgs, navigate to create a new one
             } else {
+                console.log('else')
                 navigate('/orgCreateSelect', {replace: true})
             }
-            
-            
-            // if (user?.organizations.length === 0) {
-            //     navigate('/createOrg', {replace: true})
-            // }
-            
-            // if (user?.organizations.length === 1) {
-            //     let active = user?.organizations[0]
-            //     user?.activeOrganization = user.organizations[0]
-            // }
-            
     
         }
-    })
+       }
+        volunteerStatusCheck()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     
     // const setOrganization = async (user: Volunteer) => {
        

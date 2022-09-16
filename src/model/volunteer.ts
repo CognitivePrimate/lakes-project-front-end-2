@@ -1,11 +1,11 @@
 import { ObjectId } from "mongodb";
-import Organization from "./organization";
+import { OrgContext } from "./organization";
 
-export default interface Volunteer {
+export interface Volunteer {
     _id?: ObjectId;
     uid: string;
-    organizations: object[];
-    activeOrganization: object | undefined;
+    organizations: OrgContext[];
+    activeOrganization: OrgContext | undefined;
     firstName: string;
     lastName:  string;
     preferredName?: string;
@@ -20,3 +20,9 @@ export default interface Volunteer {
     isActive?: boolean;
 }
 
+export interface volContext {
+    firstName: Volunteer["firstName"],
+    lastName: Volunteer["lastName"],
+    email: Volunteer["email"],
+    _id: Volunteer["_id"]
+}

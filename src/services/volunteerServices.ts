@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
-import Volunteer from '../model/volunteer';
-import {fire} from '../firebaseConfig'
-import volunteer from '../model/volunteer';
+import { Volunteer } from '../model/volunteer';
+import { fire } from '../firebaseConfig'
+
 import { setUserId } from 'firebase/analytics';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,20 +25,19 @@ const createToken = async () => {
     return payloadHeader
 }
 
-
 //create new volunteer, send to db, and get new volunteer back - FIX ANY
-export const createNewVolunteer = async(volunteer: Volunteer): Promise<any> => {
+export const createNewVolunteer = async (volunteer: Volunteer): Promise<any> => {
     const header = await createToken()
 
     const payload = {
         volunteer
     }
 
-    try{
+    try {
         const res = axios.post(`${baseURL}/Volunteers`, payload, header)
         console.log('header:', header)
         return (await res).data
-    } catch(e) {
+    } catch (e) {
         console.error(e)
     }
 
@@ -50,26 +49,29 @@ export function fetchVolunteers(): Promise<Volunteer[]> {
 }
 
 export async function fetchExistingVolunteerAndSetUser(token: string): Promise<any> {
+    // console.log('inFetchVol')
     const headers = {
         headers: {
             authorization: 'Bearer ' + token
-        } 
+        }
     }
-        return await axios.post(`${baseURL}/volunteerDB/tokenAuth`, token, headers ).then(async (res: AxiosResponse<any, any>) => {
-            let responseObject = res.data
-            if (responseObject._id ){
-                console.log('FERes', responseObject)
-                return await responseObject
-            } else {
-                console.log('else', responseObject)
-                const res = axios.post(`${baseURL}/volunteerDB`, responseObject.user)
-                return (await (res)).data
-            }   
+    // console.log('headers', headers)
+    return await axios.post(`${baseURL}/volunteerDB/tokenAuth`, token, headers).then(async (res: AxiosResponse<any, any>) => {
+        // console.log('inPost')
+        let responseObject = await res.data
+        if (responseObject._id) {
+            console.log('FERes', responseObject)
+            return await responseObject
+        } else {
+            console.log('else', responseObject)
+            const res = await axios.post(`${baseURL}/volunteerDB`, responseObject.user)
+            return await ((res)).data
+        }
 
-        })
+    })
 }
 
-export const updateVolunteer = async(volunteer: Volunteer): Promise<Volunteer> => {
+export const updateVolunteer = async (volunteer: Volunteer): Promise<Volunteer> => {
     return await axios.put(`${baseURL}/volunteerDB/${volunteer._id}`, volunteer).then((res) => {
         console.log('putresponse', res.data)
         return res.data

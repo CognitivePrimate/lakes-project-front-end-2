@@ -1,10 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
-import Volunteer from '../model/volunteer';
-import {fire} from '../firebaseConfig'
-import volunteer from '../model/volunteer';
 import { setUserId } from 'firebase/analytics';
 import { useNavigate } from 'react-router-dom';
-import Organization from '../model/organization';
+import { Organization } from '../model/organization';
 
 //firebase APIs to database
 // const baseURL = process.env.REACT_APP_BASE_URL

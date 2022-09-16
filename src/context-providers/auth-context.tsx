@@ -14,7 +14,7 @@ import { FirebaseError } from 'firebase/app';
 import { Navigate, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { fetchExistingVolunteerAndSetUser } from '../services/volunteerServices';
-import Volunteer from '../model/volunteer';
+import { Volunteer } from '../model/volunteer';
 
 // const baseURL = process.env.REACT_APP_BASE_URL
 
@@ -37,32 +37,52 @@ const defaultValue: AuthContextModel = {
 
 export const AuthContext = createContext(defaultValue);
 
+// export const globalUser = (): Volunteer | null => {
+//     return useContext(AuthContext).user
+// }
+
 export const AuthContextProvider = ({children}: {children: ReactNode}) => {
     // sets initial User state to null BUT HOLY SHIT FIX ANY TYPE
-    const [user, setUser] = useState<any | null>(null);
+    const [user, setUser] = useState<Volunteer | null>(null);
     // let navigate = useNavigate()
     // const functions = require('firebase-functions')
     
     // USEEFFECT HERE?! THEN REDIRECT?
     useEffect(() => {
-        onAuthStateChanged(auth, (currentUser) => {
-            //retrieve token from firebase
-            if (auth.currentUser != null) {
-                auth.currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
-                    console.log('IdToken', idToken)
-                    // Send token to your backend via HTTPS
-                    fetchExistingVolunteerAndSetUser(idToken).then((user: Volunteer) => {
-                        setUser(user)
-                        console.log('User Set:', user.firstName + user.lastName)
-                    } )
-                    
-                }).catch(function(error) {
-                    console.log(error)
-                });
+        try{
+            const handleStateChange = async () => {
+                onAuthStateChanged(auth, async () => {
+                    //retrieve token from firebase
+                    // console.log('auth', auth)
+                    if (auth.currentUser !== null) {
+                        await auth.currentUser.getIdToken(/* forceRefresh */ true).then(async function(idToken) {
+                            console.log('IdToken', idToken)
+                            // Send token to backend via HTTPS
+                            await fetchExistingVolunteerAndSetUser(idToken).then((user: Volunteer) => {
+                                setUser(user)
+                                console.log('User Set:', user.firstName + user.lastName)
+                            } )
+                            
+                        }).catch(function(error) {
+                            console.log(error)
+                        });
+                    } else if (auth.currentUser === null){
+                        setUser(null)
+                    }
+                    //LEAVE OR KILL?
+                    // setUser(currentUser);
+                    // console.log('currentUser', currentUser, typeof(currentUser));
+                })
+    
+    
             }
-            setUser(currentUser);
-            console.log('currentUser', currentUser, typeof(currentUser));
-        })
+    
+            handleStateChange()
+        } catch (e) {
+            console.log('Auth Error: ' + e)
+        }
+       
+        
     }, [])
 
     // to sign in with Google via a redirect
@@ -86,7 +106,7 @@ export const AuthContextProvider = ({children}: {children: ReactNode}) => {
                 registerEmail,
                 registerPassword
             );
-            setUser(user)
+            // setUser(user)
             
             console.log('register user:', user);
         } catch (error) {
@@ -111,10 +131,14 @@ export const AuthContextProvider = ({children}: {children: ReactNode}) => {
         await signOut(auth);
     };
 
-
     return (
         <AuthContext.Provider value={{user, signInWithGoogle, register, login, logout}}>
             {children}
         </AuthContext.Provider>
     );
+}
+
+
+export function useAuthUser(): Volunteer|null {
+    return useContext(AuthContext).user;
 }

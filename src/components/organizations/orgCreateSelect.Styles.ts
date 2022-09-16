@@ -33,4 +33,11 @@ export const Container = styled.div`
     padding: .25rem;
     color: black;
   }
+  button {
+    margin-top: .5rem
+  }
+  /* form {
+    display: flex;
+    flex-direction: column;
+  } */
 `

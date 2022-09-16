@@ -64,6 +64,11 @@ const GlobalStyle = createGlobalStyle`
         width: 100%;
     }
 
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
     input {
         border: hidden; 
         border-bottom: groove #ffffff;
@@ -77,13 +82,19 @@ const GlobalStyle = createGlobalStyle`
     }
 
     select {
-        height: 1.5rem;
+        height: 2rem;
+        font-size: 1rem;
+        text-align: center;
+        border: none;
+        /* padding: .5rem; */
         border-radius: var(--borderRadiusPrimary);
         box-shadow: var(--boxShadowPrimary);
     }
 
     select:focus {
         background: #FEF2EC;
+        border: none;
+        outline: none;
     }
 
     textarea {

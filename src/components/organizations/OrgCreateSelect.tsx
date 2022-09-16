@@ -1,9 +1,9 @@
 import { FormEvent, useContext, useEffect, useState } from "react";
 import { Route, Router, Routes, useNavigate, useRoutes } from "react-router-dom";
-import { AuthContext, AuthContextModel } from "../../context-providers/auth-context";
+import { AuthContext, AuthContextModel, useAuthUser } from "../../context-providers/auth-context";
 import MenuButton from "../buttons/menuButton";
-import Volunteer from "../../model/volunteer";
-import Organization from "../../model/organization";
+import {Volunteer, volContext} from "../../model/volunteer";
+import { Organization, OrgContext } from "../../model/organization";
 import Paper from "../paper/paper";
 import { Container, Wrapper } from "./orgCreateSelect.Styles";
 import SubmitButton from "../buttons/submitButton";
@@ -16,10 +16,11 @@ import { updateVolunteer } from "../../services/volunteerServices";
 // }
 
 const OrgCreateSelect = () => {
-  const userObject: AuthContextModel = useContext(AuthContext)
+  // const userObject: AuthContextModel = useContext(AuthContext)
   const navigate = useNavigate()
-  let user: Volunteer | null
-  user = userObject.user
+  // let user: Volunteer | null
+  const user = useAuthUser()
+  // user = userObject.user
   const [pendingOrg, setPendingOrg] = useState<Organization | any>({
     name: '',
     leads: [],
@@ -42,9 +43,9 @@ const OrgCreateSelect = () => {
             orgName: org.name,
             orgId: org._id
           })
-          user.activeOrganization = org.name
           user.lead = true
           await updateVolunteer(user)
+          user.activeOrganization = org.name
           console.log('userupdatedWithOrg', user)
           navigate('/', {replace: true})
           
@@ -56,10 +57,20 @@ const OrgCreateSelect = () => {
       console.log('error:', e)
     }
   }
+
+  const selectOrg = (e: FormEvent) => {
+    try{
+      e.preventDefault()
+      
+    } catch (e) {
+      console.log('We encountered an error selecting your org:' + e)
+    }
+  }
   
   return(
     
     <Wrapper>
+      {/* if user has active org already/ they only have one org so it's auto set */}
       {!user?.activeOrganization && 
       <>
         <Container>
@@ -71,7 +82,10 @@ const OrgCreateSelect = () => {
           <form id="createOrgForm" action="submit" onSubmit={createOrg}>
             <Container>
               <label htmlFor="orgName">Organization Name:</label>
-              <input type="text" name="orgName" id="orgName" value={pendingOrg.name} onChange={(e) => {setPendingOrg({...pendingOrg, name: e.target.value, leads: [{
+              <input type="text" name="orgName" id="orgName" value={pendingOrg.name} onChange={(e) => {setPendingOrg({
+              ...pendingOrg,
+              name: e.target.value,
+              leads: [{
                 firstName: user?.firstName,
                 lastName: user?.lastName,
                 email: user?.email,
@@ -91,12 +105,15 @@ const OrgCreateSelect = () => {
             <h3>Please select an organization to use.</h3>
           </Container>
           <Container>
-            <p>{JSON.stringify(user?.organizations)}</p>
-            <select>
-              {user?.organizations.map((org, index) => 
-                <option></option>
-              )}
-            </select>
+            <form id='selectOrgForm' action='submit' onSubmit={selectOrg}>
+              <p style={{color: 'black'}}>{JSON.stringify(user.organizations)}</p>
+              <select>
+                {user.organizations.map((org: OrgContext, index: number) => 
+                  <option key={`${org}-${index}`} value={org.orgName}>{org.orgName}</option>
+                )}
+              </select>
+              <button id='confirmOrgSelection'>Confirm</button>
+            </form>
           </Container>
         </>
       }
