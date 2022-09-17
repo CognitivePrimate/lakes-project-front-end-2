@@ -7,7 +7,7 @@ import { AuthContext } from '../context-providers/auth-context';
 
 const SignInPage = () => {
     // instantiate context
-    const {signInWithGoogle, register, login, logout} = useContext(AuthContext);
+    const {signInWithGoogle, register, login} = useContext(AuthContext);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");

@@ -5,7 +5,7 @@ export interface Volunteer {
     _id?: ObjectId;
     uid: string;
     organizations: OrgContext[];
-    activeOrganization: OrgContext | undefined;
+    activeOrganization: OrgContext | '';
     firstName: string;
     lastName:  string;
     preferredName?: string;
@@ -18,7 +18,6 @@ export interface Volunteer {
     permissionsLevel: number;
     additionalTrainings: [];
     specializations: [];
-    ICS?: number[];
     isActive?: boolean;
     picture: string;
 }

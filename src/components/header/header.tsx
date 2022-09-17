@@ -15,11 +15,11 @@ const Header = () => {
     const user: Volunteer | null = useAuthUser()
     // console.log('headerUser:', user)
     let displayName = ''
-    let orgname = ''
-
+    let orgnameMain = ''
+    
     if(user !== null  && user !== undefined) {
         displayName = `${user?.firstName} ${user?.lastName}`
-        user?.activeOrganization !== undefined ? orgname = `${user?.activeOrganization}` : orgname = ''
+        user?.activeOrganization !== '' ? orgnameMain = `${user?.activeOrganization.orgName}` : orgnameMain = ''
     }
 
     return (
@@ -30,7 +30,7 @@ const Header = () => {
                 </Link>
             } */}
             <Link to="/">
-                <h1 className='orgName'>{orgname}</h1>
+                <h1 className='orgName'>{orgnameMain}</h1>
             </Link>
             <h3>{displayName}</h3>
         </Wrapper>
