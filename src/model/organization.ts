@@ -10,5 +10,5 @@ export interface Organization {
 
 export interface OrgContext {
   orgName: Organization["name"],
-  orgId: Organization["_id"]
+  orgId?: Organization["_id"]
 }

@@ -4,7 +4,7 @@ import { AuthContext, AuthContextModel, useAuthUser } from "../../context-provid
 import MenuButton from "../buttons/menuButton";
 import { Wrapper } from "./homepage.Styles"
 import {Volunteer} from "../../model/volunteer";
-import {Organization} from "../../model/organization";
+import {Organization, OrgContext} from "../../model/organization";
 
 
 const Homepage = () => {
@@ -22,10 +22,10 @@ const Homepage = () => {
     useEffect( () => {
        const volunteerStatusCheck = async () => {
         if(user !== null  && user !== undefined) {
-            console.log('useeffect', user)
+            // console.log('useeffect', user)
             // const user: Volunteer | null =  userObject.user
-            let orgs: object[] | undefined = user?.organizations
-            let activeOrg: object | undefined = user?.activeOrganization
+            let orgs: OrgContext[] | undefined = user.organizations
+            // let activeOrg: OrgContext | undefined = user.activeOrganization
     
             
              /**
@@ -41,8 +41,8 @@ const Homepage = () => {
                 navigate('/orgCreateSelect', {replace: true})
             //if vol belongs to only one org, set that org as active and navigate home
             } else if (orgs?.length !== undefined && orgs?.length === 1){
-                activeOrg = orgs[0]
-                console.log('activeOrg', activeOrg)
+                user.activeOrganization = orgs[0]
+                console.log('Active Organization:', user.activeOrganization)
                 navigate('/Homepage', {replace: true})
             //if volunteer has no orgs, navigate to create a new one
             } else {

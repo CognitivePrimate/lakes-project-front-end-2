@@ -9,15 +9,18 @@ export interface Volunteer {
     firstName: string;
     lastName:  string;
     preferredName?: string;
+    pronouns: string;
     otherKnownAliases?: string[];
     email: string;
     hoursWorked?: []; 
     yearsAttended: [];
     lead: boolean;
     permissionsLevel: number;
+    additionalTrainings: [];
+    specializations: [];
     ICS?: number[];
-    greenDot: boolean;
     isActive?: boolean;
+    picture: string;
 }
 
 export interface volContext {

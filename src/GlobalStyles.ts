@@ -91,6 +91,7 @@ const GlobalStyle = createGlobalStyle`
         box-shadow: var(--boxShadowPrimary);
     }
 
+
     select:focus {
         background: #FEF2EC;
         border: none;
