@@ -71,7 +71,8 @@ const GlobalStyle = createGlobalStyle`
 
     input {
         border: hidden; 
-        border-bottom: groove #ffffff;
+        /* border-bottom: groove #ffffff; */
+        border-bottom: groove #FEF2EC;
         height: 30px;  
     }
 
