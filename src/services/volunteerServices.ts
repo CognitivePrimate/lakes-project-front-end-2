@@ -44,8 +44,14 @@ export const createNewVolunteer = async (volunteer: Volunteer): Promise<any> => 
 }
 
 //Get all volunteers
-export function fetchVolunteers(): Promise<Volunteer[]> {
-    return axios.get(`${baseURL}/Volunteers`)
+export function fetchVolunteers(user: any): Promise<any> {
+    const headers = {
+        headers: {
+            user: user
+        }
+    }
+    //need to account for active org. here or in backend?
+    return axios.get(`${baseURL}/VolunteerDB`, headers)
 }
 
 export async function fetchExistingVolunteerAndSetUser(token: string): Promise<any> {

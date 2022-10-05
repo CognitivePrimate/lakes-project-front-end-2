@@ -5,7 +5,7 @@ import Paper from "../paper/paper";
 export const Wrapper = styled.div`
  /* @media ${device.mobileS}{ */
    display: flex;
-   /* flex-direction: column; */
+   flex-direction: column;
    align-content: center;
    justify-content: center;
    width: 90vw;
@@ -20,20 +20,13 @@ export const Wrapper = styled.div`
  
 `
 
-export const Container = styled.div`
+export const container = styled.div`
   display: flex;
-  justify-content: space-around;
   width: 90vw;
-  padding: 1rem 0;
-  margin: 1rem;
+  padding: 0;
+  margin: 0;
   border: none;
   animation: FadeIn .7s;
   box-shadow: var(--boxShadowPrimary);
   transition: var(--transitionPrimary);
-`
-
-export const HiddenPanel = styled.div`
-    display: none;
-    width: 100%;
-
 `
