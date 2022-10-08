@@ -7,10 +7,10 @@ import { useNavigate } from 'react-router-dom';
 
 
 //firebase APIs to database
-// const baseURL = process.env.REACT_APP_BASE_URL
+const baseURL = process.env.REACT_APP_BASE_URL
 
 //local baseURL when running backend fb emulators
-const baseURL = process.env.REACT_APP_LOCAL_BASE_URL
+// const baseURL = process.env.REACT_APP_LOCAL_BASE_URL
 //create user tokens for backend auth? i think
 const createToken = async () => {
     const user = fire.auth().currentUser;
