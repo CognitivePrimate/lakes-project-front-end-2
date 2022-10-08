@@ -39,6 +39,9 @@ const Homepage = () => {
                     console.log('else')
                     navigate('/orgCreateSelect', {replace: true})
                 }
+            } else if (user?.preferredName === ''){
+                console.log('New User')
+                navigate('/welcome', {replace: true})
             }
         }
         volunteerStatusCheck()
@@ -51,30 +54,31 @@ const Homepage = () => {
 
     return (
         <Wrapper>
-            {}
-            <MenuButton 
-                to={'/SchedulingMenu'}
-                text={'Schedules'}
-            />
-            <MenuButton 
-                to={'/ShiftLogsMenu'}
-                text={'Shift Logs'}
-            />
-            <MenuButton 
-                to={'/IncidentReportsMenu'}
-                text={'Incident Reports'}
-            />
-            <MenuButton 
-                to={'/EmergencyContactsMenu'}
-                text={'Emergency Contacts'}
-            />
-            <MenuButton 
-                to={'/VolunteerDatabaseMenu'}
-                text={'Volunteer Database'}
-            />
-            
+            {user?.activeOrganization !== '' && user?.activeOrganization !==undefined && 
+                <>
+                    <MenuButton 
+                    to={'/SchedulingMenu'}
+                    text={'Schedules'}
+                    />
+                    <MenuButton 
+                        to={'/ShiftLogsMenu'}
+                        text={'Shift Logs'}
+                    />
+                    <MenuButton 
+                        to={'/IncidentReportsMenu'}
+                        text={'Incident Reports'}
+                    />
+                    <MenuButton 
+                        to={'/EmergencyContactsMenu'}
+                        text={'Emergency Contacts'}
+                    />
+                    <MenuButton 
+                        to={'/VolunteerDatabaseMenu'}
+                        text={'Volunteer Database'}
+                    />
+                </>
+            }
             <button onClick={logoutAndRedirect}>Sign Out</button>
-    
         </Wrapper>
     )
 }

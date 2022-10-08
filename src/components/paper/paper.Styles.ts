@@ -3,7 +3,7 @@ import device from '../../media-query-sizes';
 
  export const Wrapper = styled.div`
  /* @media ${device.mobileS}{ */
-   padding: .5rem;
+   padding: .75rem .5rem;
    width: 100%;
    box-sizing: border-box;
    border-radius: var(--borderRadiusPrimary);
