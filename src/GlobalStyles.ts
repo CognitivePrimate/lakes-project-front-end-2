@@ -4,9 +4,10 @@ import device from './media-query-sizes';
 const GlobalStyle = createGlobalStyle`
     :root {
         --maxWidth: 1280px;
-        --orange:  #ee5e1b;;
+        --orange:  #ee5e1b;
         --orangeHover: #f17841;
         --boxShadowPrimary: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+        /* --boxShadowPrimarySpread: 2.2px 2.2px 2.2px rgba(0, 0, 0, .3) */
         --boxShadowPrimaryHover: 3px 3px 4px 4px rgba(0, 0, 0, 0.3);
         --textPrimary: #ffffff;
         --transitionPrimary: .3s;
@@ -33,7 +34,7 @@ const GlobalStyle = createGlobalStyle`
         padding: 0;
         display: flex;
         justify-content: center;
-        background-color: rgb(240, 240, 240);
+        background-color: #F0F0;
     }
 
     h1 {

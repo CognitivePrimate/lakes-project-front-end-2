@@ -8,12 +8,12 @@ export const Wrapper = styled.div`
    flex-direction: column;
    align-content: center;
    justify-content: center;
-   width: 90vw;
+   width: 95vw;
    padding: 0;
    margin: 0;
    border: none;
    animation: FadeIn .7s;
-   box-shadow: var(--boxShadowPrimary);
+   /* box-shadow: var(--boxShadowPrimary); */
    transition: var(--transitionPrimary);
 
  /* } */

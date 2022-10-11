@@ -1,5 +1,5 @@
 import { Volunteer } from "../../model/volunteer";
-import { Container, HiddenPanel, Wrapper } from "./volunteer.Styles";
+import { Card, Container, HiddenPanel, Wrapper } from "./volunteer.Styles";
 
 
 
@@ -16,13 +16,15 @@ const VolunteerItem = ({volunteer}: Props) => {
 
     return(
         <Wrapper>
-            <Container>
-                <img id='tinyPic' src={`${user?.picture}`} alt='Volunteer Google Portrait'/>
+            <Card>
+                <img id='tinyPic' referrerPolicy="no-referrer" src={`${user?.picture}`} alt='Volunteer Google Portrait'/>
                     
                 <div>
-                    {user?.firstName}
+                    <p><b>Name:</b>{` ${user?.firstName} ${user?.lastName}`}</p>
+                    { user?.pronouns && <p><b>Pronouns:</b>{` ${user?.pronouns}`}</p>}
+                    { user?.email && <p><b>Email:</b>{` ${user?.email}`}</p>}
                 </div>
-            </Container>
+            </Card>
             <HiddenPanel>
 
             </HiddenPanel>
