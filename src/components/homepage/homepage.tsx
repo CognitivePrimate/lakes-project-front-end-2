@@ -5,6 +5,7 @@ import MenuButton from "../buttons/menuButton";
 import { Wrapper } from "./homepage.Styles"
 import {Volunteer} from "../../model/volunteer";
 import {Organization, OrgContext} from "../../model/organization";
+import { setUserId } from "firebase/analytics";
 
 
 const Homepage = () => {
@@ -33,7 +34,7 @@ const Homepage = () => {
                 } else if (orgs?.length !== undefined && orgs?.length === 1){
                     user.activeOrganization = orgs[0]
                     console.log('Active Organization:', user.activeOrganization)
-                    navigate('/Homepage', {replace: true})
+                    navigate('/', {replace: true})
                 //if volunteer has no orgs, navigate to create a new one
                 } else {
                     console.log('else')
@@ -54,7 +55,7 @@ const Homepage = () => {
 
     return (
         <Wrapper>
-            {user?.activeOrganization !== '' && user?.activeOrganization !==undefined && 
+            {user?.activeOrganization !== '' && user?.activeOrganization !== undefined && 
                 <>
                     <MenuButton 
                     to={'/SchedulingMenu'}

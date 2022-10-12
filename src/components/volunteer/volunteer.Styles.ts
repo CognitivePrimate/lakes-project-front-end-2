@@ -43,8 +43,10 @@ export const Card = styled.div`
   animation: FadeIn .7s;
   box-shadow: var(--boxShadowPrimary);
   transition: var(--transitionPrimary);
-  background: rgb(238,94,27);
-  background: linear-gradient(110deg, rgba(238,94,27,0.3) 1%, rgba(240,240,240,0.7) 25%);
+  /* background: rgb(238,94,27);
+  background: linear-gradient(110deg, rgba(238,94,27,0.3) 1%, rgba(240,240,240,0.7) 25%); */
+  background: rgb(240,240,240);
+  background: linear-gradient(297deg, rgba(240,240,240,0.5718662464985995) 51%, rgba(238,94,27,0.5998774509803921) 89%, rgba(238,94,27,1) 100%);
   
   p{
     color: black;
