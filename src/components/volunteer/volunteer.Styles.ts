@@ -21,7 +21,8 @@ export const Wrapper = styled.div`
 `
 export const Container = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  /* justify-content: space-between; */
   width: 90vw;
   padding: 1rem;
   margin: 0rem;
@@ -29,13 +30,21 @@ export const Container = styled.div`
   animation: FadeIn .7s;
   /* box-shadow: var(--boxShadowPrimary); */
   transition: var(--transitionPrimary);
+  /* .textInfoBox{
+      align-items: flex-start;
+      color: greenyellow;
+    } */
 
 `
 
 export const Card = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  /* min-height: 135px;
+  max-height: 500px; */
+  /* height: 140px; */
   padding: 1rem;
   margin: .25rem .5rem;
   border: none;
@@ -62,10 +71,29 @@ export const Card = styled.div`
     cursor: pointer;
     box-shadow: var(--boxShadowPrimaryHover)
   }
+
+  .previewCard{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
 `
 
 export const HiddenPanel = styled.div`
-    display: none;
+    /* display: none; */
+    display: flex;
+    flex: 1;
     width: 100%;
+    min-height: 0;
+    max-height: 500px;
+    margin: 0;
+    transition: max-height var(--transitionPrimary);
+    overflow: hidden;
+    animation: FadeIn .7s;
+
+    .textInfoBox{
+      align-content: flex-end;
+    }
 
 `
