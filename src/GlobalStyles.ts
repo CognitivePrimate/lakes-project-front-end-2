@@ -22,6 +22,17 @@ const GlobalStyle = createGlobalStyle`
             }
     }
 
+    @keyframes slideDown{
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    }
+
 
     * {
         font-family: 'Roboto', sans-serif;
@@ -58,6 +69,10 @@ const GlobalStyle = createGlobalStyle`
     p {
         font-size: .8rem;
         color: var(--textPrimary);
+    }
+
+    span {
+        font-size: .8rem;
     }
 
     a {

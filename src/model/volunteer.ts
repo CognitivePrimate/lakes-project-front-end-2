@@ -12,7 +12,7 @@ export interface Volunteer {
     pronouns: string;
     otherKnownAliases?: string[];
     email: string;
-    hoursWorked?: []; 
+    hoursWorked: []; 
     yearsAttended: [];
     lead: boolean;
     permissionsLevel: number;
