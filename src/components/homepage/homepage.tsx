@@ -26,15 +26,15 @@ const Homepage = () => {
                 let orgs: OrgContext[] | undefined = user.organizations
 
                 //if volunteer belongs to more than one org redirect to select org to use
-                console.log('orgs.length', orgs?.length)
-                if (orgs?.length !== undefined && orgs?.length > 1) {
+                console.log('orgs.length', orgs.length)
+                if (orgs.length !== undefined && orgs.length > 1) {
                     console.log("first")
                     navigate('/orgCreateSelect', {replace: true})
                 //if vol belongs to only one org, set that org as active and navigate home
-                } else if (orgs?.length !== undefined && orgs?.length === 1){
+                } else if (orgs.length !== undefined && orgs.length === 1){
                     user.activeOrganization = orgs[0]
                     console.log('Active Organization:', user.activeOrganization)
-                    navigate('/', {replace: true})
+                    navigate('/Homepage', {replace: true})
                 //if volunteer has no orgs, navigate to create a new one
                 } else {
                     console.log('else')
