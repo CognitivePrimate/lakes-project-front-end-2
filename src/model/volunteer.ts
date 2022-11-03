@@ -12,7 +12,7 @@ export interface Volunteer {
     pronouns: string;
     otherKnownAliases?: string[];
     email: string;
-    hoursWorked?: []; 
+    hoursWorked: []; 
     yearsAttended: [];
     lead: boolean;
     permissionsLevel: number;
@@ -28,3 +28,4 @@ export interface volContext {
     email: Volunteer["email"],
     _id: Volunteer["_id"]
 }
+

@@ -17,11 +17,12 @@ import { updateVolunteer } from "../../services/volunteerServices";
 
 const OrgCreateSelect = () => {
   let user: Volunteer | null = useAuthUser()
+  const [activeOrg, setActiveOrg] = useState<OrgContext>({orgName: ''})
   if (user?.activeOrganization !== '' && user?.activeOrganization !== undefined){
-    user.activeOrganization = user.organizations[0]
+    setActiveOrg(user.organizations[0])
     console.log('defaultorgset', user.activeOrganization)
   }
-  const [activeOrg, setActiveOrg] = useState<OrgContext>({orgName: ''})
+  // const [activeOrg, setActiveOrg] = useState<OrgContext>({orgName: ''})
   // const userObject: AuthContextModel = useContext(AuthContext)
   const navigate = useNavigate()
   // let user: Volunteer | null
@@ -139,7 +140,7 @@ const OrgCreateSelect = () => {
               <p style={{ color: 'black' }}>{JSON.stringify(user.organizations)}</p>
               <select onChange={handleOrgSelect}>
                 {user.organizations.map((org: OrgContext, index: number) =>
-                  <option key={`${org}-${index}`} value={index} defaultValue={index}>{org.orgName}</option>
+                  <option key={`${org}-${index}`} value={index}>{org.orgName}</option>
                 )}
               </select>
               <button type={'submit'} name={'submit'} form={'selectOrgForm'}>Confirm</button>
