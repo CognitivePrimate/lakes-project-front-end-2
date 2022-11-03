@@ -44,10 +44,10 @@ export const createNewVolunteer = async (volunteer: Volunteer): Promise<any> => 
 }
 
 //Get all volunteers
-export function fetchVolunteers(user: any): Promise<any> {
+export function fetchVolunteers(user: Volunteer): Promise<any> {
     const headers = {
         headers: {
-            user: user
+            activeOrg: JSON.stringify(user.activeOrganization)
         }
     }
     //need to account for active org. here or in backend?
